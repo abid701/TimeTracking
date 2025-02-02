@@ -5,10 +5,12 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "employees")
-public class Employees implements Serializable {
+public class Employee implements Serializable {
 
     @Id
     @Column(name = "id")
@@ -29,7 +31,19 @@ public class Employees implements Serializable {
 
     private boolean isActive;
 
-    public Employees(){}
+    public Employee(){}
+
+    @OneToMany(mappedBy = "employee")
+    private Set<WorkingLogs> workingLogs = new HashSet<>();
+
+    public Set<WorkingLogs> getWorkingLogs() {
+        return workingLogs;
+    }
+
+    public void setWorkingLogs(Set<WorkingLogs> workingLogs){
+        this.workingLogs = workingLogs;
+    }
+
 
 
     public int getId(){

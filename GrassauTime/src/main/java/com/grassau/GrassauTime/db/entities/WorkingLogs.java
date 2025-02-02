@@ -16,7 +16,9 @@ public class WorkingLogs implements Serializable {
     @Column(name = "id")
     private int id;
 
-    private int employeeId;
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false)
+    private Employee employee;
 
     private int projectId;
 
@@ -43,13 +45,12 @@ public class WorkingLogs implements Serializable {
         this.id = id;
     }
 
-    @JoinColumn()
-    public int getEmployeeId() {
-        return employeeId;
+    public String getEmployee() {
+        return employee.getFirstName();
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public int getProjectId() {

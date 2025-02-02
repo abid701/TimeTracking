@@ -1,0 +1,21 @@
+package com.grassau.GrassauTime.services;
+
+import com.grassau.GrassauTime.db.entities.Employees;
+import com.grassau.GrassauTime.db.repositories.EmployeesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class EmployeesService {
+
+    private final EmployeesRepository employeesRepository;
+
+    @Autowired
+    public EmployeesService (EmployeesRepository employeesRepository){
+        this.employeesRepository = employeesRepository;
+    }
+
+    public Iterable<Employees> getAllEmployees(){
+        return employeesRepository.findAll();
+    }
+}

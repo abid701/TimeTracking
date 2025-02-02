@@ -43,6 +43,7 @@ public class WorkingLogs implements Serializable {
         this.id = id;
     }
 
+    @JoinColumn()
     public int getEmployeeId() {
         return employeeId;
     }

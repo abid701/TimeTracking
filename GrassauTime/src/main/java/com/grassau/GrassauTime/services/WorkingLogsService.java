@@ -4,7 +4,6 @@ package com.grassau.GrassauTime.services;
 import com.grassau.GrassauTime.db.entities.WorkingLogs;
 import com.grassau.GrassauTime.db.repositories.WorkingLogsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 
@@ -21,6 +20,10 @@ public class WorkingLogsService {
     public Iterable<WorkingLogs> getAllWorkingLogs(){
         return workingLogsRepository.findAll();
     }
+
+//    public Iterable<Employees> getAllEmployeesFirstName(){
+//        return workingLogsRepository.findAllEmployessFirstName();
+//    }
 
 
 }

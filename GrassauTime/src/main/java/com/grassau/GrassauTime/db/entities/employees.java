@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "employees")
-public class Employee implements Serializable {
+public class Employees implements Serializable {
 
     @Id
     @Column(name = "id")
@@ -31,9 +31,10 @@ public class Employee implements Serializable {
 
     private boolean isActive;
 
-    public Employee(){}
+    public Employees(){}
 
-    @OneToMany(mappedBy = "employee")
+
+    @OneToMany(mappedBy = "employees")
     private Set<WorkingLogs> workingLogs = new HashSet<>();
 
     public Set<WorkingLogs> getWorkingLogs() {

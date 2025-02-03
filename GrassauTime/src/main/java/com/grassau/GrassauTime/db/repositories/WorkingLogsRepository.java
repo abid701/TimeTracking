@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WorkingLogsRepository extends CrudRepository<WorkingLogs, Integer> {
+   // List<Employees> findAllEmployessFirstName();
 }

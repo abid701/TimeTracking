@@ -18,7 +18,7 @@ public class WorkingLogs implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "employee_id", nullable = false)
-    private Employee employee;
+    private Employees employees;
 
     private int projectId;
 
@@ -45,12 +45,12 @@ public class WorkingLogs implements Serializable {
         this.id = id;
     }
 
-    public String getEmployee() {
-        return employee.getFirstName();
+    public String getEmployees() {
+        return employees.getFirstName();
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployees(Employees employees) {
+        this.employees = employees;
     }
 
     public int getProjectId() {

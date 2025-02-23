@@ -39,6 +39,7 @@ public class WelcomeController {
         Employee employee = employeeService.getEmployeeByCardNumber(cardNumber);
 
 
+
         if (employee == null){
             redirectAttributes.addFlashAttribute("errorMessage", "Employee Not Found");
             System.out.println("Not Found");
@@ -53,14 +54,28 @@ public class WelcomeController {
 
         String message;
 
+        LocalTime allowedStartTime = LocalTime.of(8, 0);
+        LocalTime aLittleLate = LocalTime.of(8, 5);
+        LocalTime lateThreshold = LocalTime.of(9, 0);
+        System.out.println(lateThreshold);
+        LocalTime now = LocalTime.now();
+
         if (lastLog.getBreakStarted() == null){
-            message = "Good Morning, " + employee.getFirstName() + "! Your shift has started.";
+            if (now.isAfter(allowedStartTime) && now.isBefore(aLittleLate)){
+                message = "Guten Morgen, " + employee.getFirstName() + " versuche pünktlicher zu sein!!";
+            } else if (now.isAfter(aLittleLate) && now.isBefore(lateThreshold)){
+                System.out.println("else if statement also works!!");
+                message = "Du bist zu Spät, " + employee.getFirstName() + " Acht darauf, die Küche richtig Sauber zu machen";
+            } else {
+                System.out.println("else statement works");
+                message = "Guten Morgen, " + employee.getFirstName() + "! Deine Schicht hat begonnen.";
+            }
         } else if (lastLog.getBreakEnded() == null){
-            message = "Break started, " + employee.getFirstName() + "! Enjoy your rest.";
+            message = "Pause gestartet, " + employee.getFirstName() + "! Viel Spaß.";
         } else if (lastLog.getBreakStarted() != null && lastLog.getEndTime() == null){
-            message = "Welcome back, " + employee.getFirstName() + "! Your break has ended.";
+            message = "Willkommen zurück, " + employee.getFirstName() + "! Die Pause ist vorbei.";
         } else {
-            message = "Goodbye, " + employee.getFirstName() + "! See you next time.";
+            message = "Tschüss, " + employee.getFirstName() + "! Bis zum nächstem Mal - hoffentlich ohne Verspätung!";
         }
 
 

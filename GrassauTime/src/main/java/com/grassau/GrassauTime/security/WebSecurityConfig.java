@@ -98,7 +98,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/welcome", "/scan", "/css/**", "/js/**", "/images/**",
+                        .requestMatchers("/", "/welcome", "/scan", "/styles/**", "/js/**", "/images/**",
                                 "web/controllers/WelcomeController").permitAll() // Allow these paths without login
                         .requestMatchers("/admin/**").hasRole("ADMINISTRATOR")
                         .requestMatchers("/employee/**").hasRole("USER")

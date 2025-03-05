@@ -41,6 +41,10 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
+    public Employee getEmployeeById(int id){
+        return employeeRepository.findEmployeeById(id);
+    }
+
     public Employee getEmployeeByCardNumber(String cardNumber){
         return employeeRepository.findEmployeeByCardId(cardNumber);
     }

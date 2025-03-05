@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
   <title>Home</title>
    <link th:href="@{/styles/employee.css}" rel="stylesheet" />
@@ -12,7 +11,6 @@
 
   <img src="images/logo.png" alt="Company Logo" class="logo">
 
-  <!--    <h2>GrassauTime</h2>  -->
 
   <a href="home">Dashboard</a>
   <a href="employee">Employees</a>
@@ -84,7 +82,7 @@
 <div class="modal" id="employeeModal">
   <div class="modal-content">
     <h2>Add Employee</h2>
-    <form action="/employee/add" method="post">
+    <form th:action="@{/employee/add}" method="post">
       <input type="text" name="firstName" placeholder="First Name" required>
       <input type="text" name="lastName" placeholder="Last Name" required>
       <input type="email" name="email" placeholder="Email" required>

@@ -1,0 +1,420 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Home</title>
+    <!-- <link th:href="@{/styles/home.css}" rel="stylesheet" />  -->
+    <!-- <script type="text/javascript" th:src="@{/javascript/homePage.js}"></script> -->
+
+    <style>
+
+        *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    /* 2. Root Variables */
+    :root {
+        --primary-color: #3498db;
+        --secondary-color: #2c3e50;
+        --background-color: #ecf0f1;
+        --text-color: #333;
+        --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        --border-radius: 12px;
+    }
+
+    /* 3. Default Desktop Styles */
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        height: 100vh;
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
+
+    /* Sidebar remains fixed on larger screens */
+    .sidebar {
+        width: 280px;
+        background: var(--secondary-color);
+        color: white;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: var(--box-shadow);
+
+        /* Fixed (sticky) sidebar */
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .sidebar h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .sidebar a {
+        color: white;
+        text-decoration: none;
+        padding: 15px;
+        display: block;
+        border-radius: var(--border-radius);
+        margin: 5px 0;
+        transition: background 0.3s;
+        font-weight: bold;
+    }
+
+    .sidebar a:hover {
+        background: var(--primary-color);
+    }
+
+    .logo {
+        display: block;
+        width: 100%;
+       /* max-width: 150px; */
+        margin: 0 auto 15px;
+        border-radius: var(--border-radius);
+    }
+
+    .content {
+        flex: 1;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-top: auto;
+        margin: auto;
+        margin-left: 11%;
+    }
+
+    .table-container {
+        width: 100%;
+        background: white;
+        padding: 20px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+    .modal {
+        display: none; /* Initially hidden */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        align-items: center;
+        justify-content: center;
+        z-index: 2000; /* Ensures it appears above everything */
+    }
+
+    .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        width: 400px; /* Adjust size as needed */
+        max-width: 90%;
+        text-align: center;
+    }
+
+    .settings-menu {
+        display: none;
+        position: absolute;
+        top: 40px;
+        right: 0;
+        background: white;
+        padding: 10px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        z-index: 1000;
+    }
+
+    .filter-container {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .settings-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .filter-container select, .filter-container input {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    .settings-icon {
+        cursor: pointer;
+        font-size: 24px;
+        padding: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    .show {
+        display: block;
+    }
+
+    .settings-icon {
+        cursor: pointer;
+        font-size: 24px;
+        padding: 10px;
+        transition: transform 0.3s ease;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+
+    @media (max-width: 1280px) {
+      .content {
+        margin-left: 280px;
+      }
+    }
+
+    @media (max-width: 1023px) {
+
+      .table-container {
+        width: 100%;
+        padding: 15px;
+      }
+
+      /* Ensure content stays clear of the sidebar */
+      .content {
+        margin: auto;
+        margin-top: 2%;
+        margin-left: 21%;
+      }
+
+      /* For tablets and mobiles (screens up to 768px wide) */
+    @media (max-width: 768px) {
+      /* Stack the layout vertically */
+      body {
+        flex-direction: column;
+      }
+
+      /* Sidebar becomes a full-width top bar */
+      .sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 10px;
+        box-shadow: none; /* Optional: remove shadow on mobile */
+      }
+
+      .sidebar a {
+        flex: 1 1 auto;
+        padding: 10px;
+        margin: 5px;
+        text-align: center;
+        font-size: 0.9em;
+      }
+
+      /* Remove left margin for content when sidebar is on top */
+      .content {
+        margin: 0;
+        padding: 20px;
+      }
+
+      .table-container {
+        width: 100%;
+        padding: 15px;
+      }
+
+    }
+
+    </style>
+
+</head>
+<body>
+
+<div class="sidebar">
+
+    <img src="images/logo.png" alt="Company Logo" class="logo">
+
+    <!--    <h2>GrassauTime</h2>  -->
+
+    <a href="home">Dashboard</a>
+    <a href="employee">Employees</a>
+    <a href="project">Projects</a>
+    <a href="#">Tasks</a>
+    <a href="#">Reports</a>
+    <a href="#">Settings</a>
+</div>
+
+
+<div class="content">
+
+    <h2>Employees</h2>
+
+    <div class="table-container">
+
+        <div class="filter-container">
+
+            <select id="statusFilter">
+                <option value="all">All</option>
+                <option value="ongoing">Ongoing</option>
+                <option value="completed">Completed</option>
+                <option value="paused">Paused</option>
+            </select>
+
+            <input type="text" id="searchBox" placeholder="Search by name or client...">
+
+        </div>
+
+        <div class="settings-container">
+            <span class="settings-icon" onclick="toggleSettings()">⚙️</span>
+            <div class="settings-menu">
+                <button onclick="openModal()">➕ Add Project</button>
+                <button onclick="toggleRemoveMode()">🗑️ Remove Project</button>
+            </div>
+
+        </div>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Position</th>
+                <th>Hourly Rate</th>
+                <th>Date Hired</th>
+                <th>Is Active</th>
+                <th>Actions</th>
+            </tr>
+
+
+            <!--    &lt;!&ndash;  <tr th:each="employee : ${allEmployees}"> &ndash;&gt;-->
+            <!--      &lt;!&ndash;     <td th:text="${employee.id}"></td>-->
+            <!--           <td th:text="${employee.firstName}"></td>-->
+            <!--           <td th:text="${employee.lastName}"></td>-->
+            <!--           <td th:text="${employee.email}"></td>-->
+            <!--           <td th:text="${employee.employeePosition}"></td>-->
+            <!--           <td th:text="${employee.hourlyRate}"></td>-->
+            <!--           <td th:text="${employee.dateHired}"></td>-->
+            <!--           <td th:text="${employee.isActive}"></td>-->
+            <!--           <td>-->
+            <!--             <button onclick="deleteEmployee([[${employee.id}]])" style="color: red;">Delete</button>-->
+            <!--           </td>-->
+            <!--         </tr>-->
+            <!--   &ndash;&gt;-->
+
+            <!--      Below is all the new code-->
+            <tr th:each="employee : ${allEmployees}">
+                <td th:text="${employee.id}"></td>
+                <td th:text="${employee.firstName}"></td>
+                <td th:text="${employee.lastName}"></td>
+                <td th:text="${employee.email}"></td>
+                <td th:text="${employee.employeePosition}"></td>
+                <td th:text="${employee.hourlyRate}"></td>
+                <td th:text="${employee.dateHired}"></td>
+                <td th:text="${employee.isActive}"></td>
+                <td>
+                    <a th:href="@{'/employee/delete/' + ${employee.id}}" onclick="return confirm('Are you sure?')">❌ Delete</a>
+                </td>
+            </tr>
+
+        </table>
+
+
+    </div>
+</div>
+
+<!-- Modal for Adding Employees -->
+<!--<div class="modal" id="employeeModal">-->
+<!--  <div class="modal-content">-->
+<!--    <h2>Add Employee</h2>-->
+<!--    <input type="text" id="firstName" placeholder="First Name">-->
+<!--    <input type="text" id="lastName" placeholder="Last Name">-->
+<!--    <input type="text" id="email" placeholder="Email">-->
+<!--    <input type="text" id="position" placeholder="Position">-->
+<!--    <input type="number" id="hourlyRate" placeholder="Hourly Rate">-->
+<!--    <input type="date" id="dateHired" placeholder="dateHired">-->
+<!--    <input type="text" id="cardId" placeholder="cardId">-->
+<!--    <select id="status">-->
+<!--      <option value="active">Active</option>-->
+<!--      <option value="notActive">Not Active</option>-->
+<!--    </select>-->
+<!--    <button onclick="addEmployee()">Add</button>-->
+<!--    <button onclick="closeModal()">Cancel</button>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!-- Modal for Adding Employees -->
+<div class="modal" id="employeeModal">
+    <div class="modal-content">
+        <h2>Add Employee</h2>
+        <form action="/employee/add" method="post">
+            <input type="text" name="firstName" placeholder="First Name" required>
+            <input type="text" name="lastName" placeholder="Last Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="employeePosition" placeholder="Position" required>
+            <input type="number" name="hourlyRate" placeholder="Hourly Rate">
+            <input type="date" name="dateHired" required>
+            <input type="text" name="cardId" placeholder="Card ID">
+            <select name="isActive">
+                <option value="true">Active</option>
+                <option value="false">Not Active</option>
+            </select>
+            <button type="submit">Add</button>
+            <button type="button" onclick="closeModal()">Cancel</button>
+        </form>
+    </div>
+</div>
+
+
+
+<script>
+    // Open the modal
+    function openModal() {
+        document.getElementById("employeeModal").style.display = "flex";
+    }
+
+    // Close the modal
+    function closeModal() {
+        document.getElementById("employeeModal").style.display = "none";
+    }
+
+</script>
+
+
+</body>
+</html>

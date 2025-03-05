@@ -321,23 +321,6 @@
                 <th>Actions</th>
             </tr>
 
-
-            <!--    &lt;!&ndash;  <tr th:each="employee : ${allEmployees}"> &ndash;&gt;-->
-            <!--      &lt;!&ndash;     <td th:text="${employee.id}"></td>-->
-            <!--           <td th:text="${employee.firstName}"></td>-->
-            <!--           <td th:text="${employee.lastName}"></td>-->
-            <!--           <td th:text="${employee.email}"></td>-->
-            <!--           <td th:text="${employee.employeePosition}"></td>-->
-            <!--           <td th:text="${employee.hourlyRate}"></td>-->
-            <!--           <td th:text="${employee.dateHired}"></td>-->
-            <!--           <td th:text="${employee.isActive}"></td>-->
-            <!--           <td>-->
-            <!--             <button onclick="deleteEmployee([[${employee.id}]])" style="color: red;">Delete</button>-->
-            <!--           </td>-->
-            <!--         </tr>-->
-            <!--   &ndash;&gt;-->
-
-            <!--      Below is all the new code-->
             <tr th:each="employee : ${allEmployees}">
                 <td th:text="${employee.id}"></td>
                 <td th:text="${employee.firstName}"></td>
@@ -357,26 +340,6 @@
 
     </div>
 </div>
-
-<!-- Modal for Adding Employees -->
-<!--<div class="modal" id="employeeModal">-->
-<!--  <div class="modal-content">-->
-<!--    <h2>Add Employee</h2>-->
-<!--    <input type="text" id="firstName" placeholder="First Name">-->
-<!--    <input type="text" id="lastName" placeholder="Last Name">-->
-<!--    <input type="text" id="email" placeholder="Email">-->
-<!--    <input type="text" id="position" placeholder="Position">-->
-<!--    <input type="number" id="hourlyRate" placeholder="Hourly Rate">-->
-<!--    <input type="date" id="dateHired" placeholder="dateHired">-->
-<!--    <input type="text" id="cardId" placeholder="cardId">-->
-<!--    <select id="status">-->
-<!--      <option value="active">Active</option>-->
-<!--      <option value="notActive">Not Active</option>-->
-<!--    </select>-->
-<!--    <button onclick="addEmployee()">Add</button>-->
-<!--    <button onclick="closeModal()">Cancel</button>-->
-<!--  </div>-->
-<!--</div>-->
 
 <!-- Modal for Adding Employees -->
 <div class="modal" id="employeeModal">

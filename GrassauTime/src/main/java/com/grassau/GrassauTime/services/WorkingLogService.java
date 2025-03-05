@@ -67,6 +67,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 import java.util.Optional;
 
 @Service
@@ -100,6 +101,10 @@ public class WorkingLogService {
 
     public WorkingLog getWorkingLogByEmployeeAndWorkDate(Employee employee, LocalDate date){
         return workingLogRepository.findByEmployeeAndWorkDate(employee, date);
+    }
+
+    public Iterable<WorkingLog> getAllWorkingLogsByWorkDateBetween(LocalDate startDate, LocalDate endDate){
+        return workingLogRepository.findAllByWorkDateBetween(startDate, endDate);
     }
 
 

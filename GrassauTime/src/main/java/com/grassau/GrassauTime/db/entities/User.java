@@ -70,5 +70,11 @@ public class User {
         this.role = role;
     }
 
+    public String getEmployee(){
+        return employee.getFirstName();
+    }
 
+    public void setEmployee(Employee employee){
+        this.employee = employee;
+    }
 }

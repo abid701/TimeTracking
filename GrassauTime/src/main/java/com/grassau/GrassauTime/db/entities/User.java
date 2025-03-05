@@ -5,11 +5,21 @@ import com.grassau.GrassauTime.enums.Role;
 import jakarta.persistence.*;
 
 
+/**
+ * Represents a User entity in the system.
+ * This entity is mapped to the "users" table in the database.
+ */
 @Entity
 @Table(name = "users")
 public class User {
 
+    /**
+     * Unique identifier for the user.
+     * Auto-generated using identity strategy. This is like auto_increment in MySQL or SERIAL in PostgreSQL.
+     */
     @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String username;
@@ -70,8 +80,19 @@ public class User {
         this.role = role;
     }
 
+    /**
+     * Gets the first name of the employee.
+     * If there is no employee, returns "N/A".
+     *
+     * @return The first name of the employee or "N/A" if not existed.
+     */
     public String getEmployee(){
-        return employee.getFirstName();
+        if (employee != null){
+            return employee.getFirstName();
+        } else {
+            return "N/A";
+        }
+
     }
 
     public void setEmployee(Employee employee){

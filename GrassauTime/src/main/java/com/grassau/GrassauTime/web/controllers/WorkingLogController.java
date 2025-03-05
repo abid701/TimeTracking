@@ -11,6 +11,11 @@ import com.grassau.GrassauTime.services.WorkingLogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.YearMonth;
 
 @Controller
 public class WorkingLogController {
@@ -29,7 +34,21 @@ public class WorkingLogController {
     }
 
     @GetMapping("/home")
-    public String showHome(Model model){
+    public String showHome(@RequestParam(required = false) String date,
+                           Model model){
+
+        YearMonth currentMonth = YearMonth.now();
+        LocalDate startOfMonth = currentMonth.atDay(1);
+        LocalDate endOfMonth = currentMonth.atEndOfMonth();
+
+
+        if (date != null && date.equals("thisMonth")){
+            Iterable<WorkingLog> thisMonthWorkingLogs = workingLogService.getAllWorkingLogsByWorkDateBetween(startOfMonth,
+                    endOfMonth);
+            System.out.println("It Works the new method works");
+            model.addAttribute("allWorkingLogs", thisMonthWorkingLogs);
+            return "view/home.html";
+        }
 
         Iterable<WorkingLog> allWorkingLogs = workingLogService.getAllWorkingLog();
 

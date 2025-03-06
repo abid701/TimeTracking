@@ -67,7 +67,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.Month;
 import java.util.Optional;
 
 @Service
@@ -132,4 +131,10 @@ public class WorkingLogService {
 
         }
     }
+
+    // Search by employee name
+    public Iterable<WorkingLog> searchByEmployeeName(String employeeName) {
+        return workingLogRepository.findByEmployee_FirstNameContainingIgnoreCase(employeeName);
+    }
+
 }

@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <title>Tasks</title>
+    <link th:href="@{/styles/task.css}" rel="stylesheet" />
+<!--    <script type="text/javascript" th:src="@{/javascript/homePage.js}"></script>-->
+</head>
+<body>
+
+<div class="sidebar">
+    <img src="images/logo.png" alt="Company Logo" class="logo">
+    <a href="home">Dashboard</a>
+    <a href="employee">Employees</a>
+    <a href="project" class="active">Projects</a>
+    <a href="tasks.html">Tasks</a>
+    <a href="reports.html">Reports</a>
+    <a href="settings.html">Settings</a>
+</div>
+
+<div class="content">
+    <h1>Tasks</h1>
+    <div class="table-container">
+
+        <div class="filter-container">
+            <select id="statusFilter">
+                <option value="all">All</option>
+                <option value="ongoing">Ongoing</option>
+                <option value="completed">Completed</option>
+                <option value="paused">Paused</option>
+            </select>
+            <input type="text" id="searchBox" placeholder="Search by name or client...">
+        </div>
+
+        <div class="settings-container">
+            <span class="settings-icon" onclick="toggleSettings()">⚙️</span>
+            <div class="settings-menu">
+                <button onclick="openModal()">➕ Add Project</button>
+                <button onclick="toggleRemoveMode()">🗑️ Remove Project</button>
+            </div>
+        </div>
+
+        <h2>Task List</h2>
+        <table>
+            <tr>
+                <th>Task</th>
+                <th>Project</th>
+                <th>Assigned To</th>
+                <th>Status</th>
+                <th>Deadline</th>
+            </tr>
+            <tr class="highlight">
+                <td>🚀 Develop Login System</td>
+                <td>Project A</td>
+                <td><strong>You</strong></td>
+                <td><span class="status in-progress">In Progress</span></td>
+                <td>2024-02-15</td>
+            </tr>
+            <tr>
+                <td>Design Database Schema</td>
+                <td>Project B</td>
+                <td>Bob Smith</td>
+                <td><span class="status completed">Completed</span></td>
+                <td>2024-01-30</td>
+            </tr>
+            <tr>
+                <td>🎨 Frontend UI Design</td>
+                <td>Project C</td>
+                <td>Emma Davis</td>
+                <td><span class="status todo">Todo</span></td>
+                <td>2024-03-01</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="modal" id="projectModal">
+    <div class="modal-content">
+        <h2>Add Project</h2>
+        <input type="text" id="projectName" placeholder="Project Name">
+        <input type="text" id="clientName" placeholder="Client Name">
+        <input type="date" id="startDate">
+        <input type="date" id="endDate">
+        <select id="status">
+            <option value="ongoing">Ongoing</option>
+            <option value="completed">Completed</option>
+            <option value="paused">Paused</option>
+        </select>
+        <button onclick="addProject()">Add</button>
+        <button onclick="closeModal()">Cancel</button>
+    </div>
+</div>
+
+</body>
+</html>

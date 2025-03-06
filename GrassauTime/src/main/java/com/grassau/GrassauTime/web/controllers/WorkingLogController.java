@@ -50,6 +50,7 @@ public class WorkingLogController {
             return "view/home.html";
         }
 
+
         Iterable<WorkingLog> allWorkingLogs = workingLogService.getAllWorkingLog();
 
     //    Iterable<Employees> allEmployees = workingLogsService.getAllEmployeesFirstName();
@@ -88,4 +89,19 @@ public class WorkingLogController {
 
         return "view/home.html";
     }
+
+
+    // Search by employee name
+    @GetMapping("/home/search/employee")
+    public String searchByEmployee(@RequestParam(required = false) String name,
+                                   Model model){
+
+        Iterable<WorkingLog> allWorkingLogs = workingLogService.searchByEmployeeName(name);
+
+        model.addAttribute("allWorkingLogs", allWorkingLogs);
+
+        return "view/home.html";
+
+    }
+
 }

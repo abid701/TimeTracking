@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link th:href="@{/styles/welcome.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/welcome.js}"></script>
+</head>
+<body>
+<div class="sidebar">
+    <img src="images/logo.png" alt="Company Logo" class="logo">
+    <a href="home">Dashboard</a>
+    <a href="employee">Employees</a>
+    <a href="project" class="active">Projects</a>
+    <a href="tasks.html">Tasks</a>
+    <a href="reports.html">Reports</a>
+    <a href="settings">Settings</a>
+</div>
+
+<div class="content">
+    <h1 th:if="${statusMessage}" th:text="${statusMessage}" class="welcome-message">Welcome</h1>
+    <h3 th:if="${errorMessage}" th:text="${errorMessage}" class="error-message" style="color: red;"> Hello</h3>
+    <div class="scanner">
+        <h2>Place Your Card On The Scanner</h2>
+        <form id="activityLogger" method="POST" th:action="@{/scan}">
+            <input type="text" id="cardNumber" name="cardNumber" placeholder="Scan Your Card" autofocus
+                   oninput="checkLength()">
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="table-container">
+        <h2>Current Employees On Site</h2>
+        <table>
+            <tr>
+                <th>Employee</th>
+                <th>Check-in Time</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="workLog : ${employeesOnSite}">
+                <td th:text="${workLog.employee}"></td>
+                <td th:text="${workLog.startTime}"></td>
+                <td> Nothing</td>
+           <!--     <td><button class="remove-btn" th:attr="data-id=${employee.id}">Remove</button></td> -->
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

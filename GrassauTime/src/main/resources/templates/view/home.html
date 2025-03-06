@@ -30,16 +30,20 @@
     </div>
     <div class="table-container">
 
-        <form th:action="@{/home}" method="get">
+
             <div class="filter-container">
-                <select id="filterByDate" name="date" onchange="this.form.submit()">
-                    <option>--</option>
-                    <option value="thisMonth">This Month</option>
-                    <option value="all">All Time</option>
-                </select>
-                <input type="text" id="searchBox" placeholder="Search by name">
+                <form th:action="@{/home}" method="get">
+                    <select id="filterByDate" name="date" onchange="this.form.submit()">
+                        <option>--</option>
+                        <option value="thisMonth">This Month</option>
+                        <option value="all">All Time</option>
+                    </select>
+                </form>
+                <form th:action="@{/home/search/employee}" method="get">
+                    <input type="text" id="searchBox" name="name" placeholder="Search by Employee Name">
+                </form>
             </div>
-        </form>
+
 
         <div class="settings-container">
             <span class="settings-icon" onclick="toggleSettings()">⚙️</span>

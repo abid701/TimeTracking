@@ -17,7 +17,7 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping("/tasks")
+    @GetMapping("/task")
     public String showTask(Model model){
 
         Iterable<Task> allTasks = taskService.getAllTasks();

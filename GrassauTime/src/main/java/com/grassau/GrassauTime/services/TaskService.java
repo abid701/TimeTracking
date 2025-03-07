@@ -19,4 +19,8 @@ public class TaskService {
     public Iterable<Task> getAllTasks(){
         return taskRepository.findAll();
     }
+
+    public Iterable<Task> getAllTasksByStatus(String status){
+        return taskRepository.findAllByTaskStatus(status);
+    }
 }

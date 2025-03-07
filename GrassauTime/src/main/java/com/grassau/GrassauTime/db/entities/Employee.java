@@ -8,6 +8,10 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+
+/**
+ * Represents an employee entity in the database.
+ */
 @Entity
 @Table(name = "employees")
 public class Employee implements Serializable {
@@ -54,22 +58,41 @@ public class Employee implements Serializable {
     @OneToMany(mappedBy = "assignedTo")
     private Set<Task> tasks = new HashSet<>();
 
+
+    /**
+     * Gets the working logs associated with the employee.
+     * @return Set of WorkingLog objects.
+     */
     public Set<WorkingLog> getWorkingLogs() {
         return workingLogs;
     }
 
+    /**
+     * Sets the working logs for the employee.
+     * @param workingLogs Set of WorkingLog objects.
+     */
     public void setWorkingLogs(Set<WorkingLog> workingLogs){
         this.workingLogs = workingLogs;
     }
 
+    /**
+     * Gets the tasks assigned to the employee.
+     * @return Set of Task objects.
+     */
     public Set<Task> getTasks() {
         return tasks;
     }
 
+    /**
+     * Sets the tasks for the employee.
+     * @param tasks Set of Task objects.
+     */
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
     }
 
+    // Below are all the normal getters and setters for the properties of the employee class
+    
     public int getId(){
         return id;
     }
@@ -142,6 +165,5 @@ public class Employee implements Serializable {
         this.cardId = cardId;
     }
 
-
-
+    
 }

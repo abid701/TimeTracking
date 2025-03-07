@@ -4,7 +4,6 @@ package com.grassau.GrassauTime.web.controllers;
 import com.grassau.GrassauTime.db.entities.Employee;
 import com.grassau.GrassauTime.db.entities.Project;
 import com.grassau.GrassauTime.db.entities.WorkingLog;
-import com.grassau.GrassauTime.db.repositories.EmployeeRepository;
 import com.grassau.GrassauTime.services.EmployeeService;
 import com.grassau.GrassauTime.services.ProjectService;
 import com.grassau.GrassauTime.services.WorkingLogService;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.YearMonth;
 
 @Controller
@@ -46,14 +44,41 @@ public class WorkingLogController {
             Iterable<WorkingLog> thisMonthWorkingLogs = workingLogService.getAllWorkingLogsByWorkDateBetween(startOfMonth,
                     endOfMonth);
             System.out.println("It Works the new method works");
+
+
+            Iterable<Employee> allEmployees = employeeService.getAllEmployee();
+
+            int numberOfEmployees = 0;
+
+            for (Employee employee : allEmployees){
+                numberOfEmployees += 1;
+            }
+
+            Iterable<Project> allProjects = projectService.getAllProjects();
+
+            int numberOfOngoingProjects = 0;
+
+            for (Project project : allProjects){
+                String status = project.getProjectStatus();
+                if (status.equals("ongoing")){
+                    System.out.println("Success");
+                    numberOfOngoingProjects += 1;
+                }
+                System.out.println(project);
+
+            }
+
             model.addAttribute("allWorkingLogs", thisMonthWorkingLogs);
+
+            model.addAttribute("numberOfEmployees", numberOfEmployees);
+
+            model.addAttribute("numberOfOngoingProjects", numberOfOngoingProjects);
             return "view/home.html";
         }
 
 
         Iterable<WorkingLog> allWorkingLogs = workingLogService.getAllWorkingLog();
 
-    //    Iterable<Employees> allEmployees = workingLogsService.getAllEmployeesFirstName();
 
         Iterable<Employee> allEmployees = employeeService.getAllEmployee();
 
@@ -96,9 +121,37 @@ public class WorkingLogController {
     public String searchByEmployee(@RequestParam(required = false) String name,
                                    Model model){
 
+
+
+        Iterable<Employee> allEmployees = employeeService.getAllEmployee();
+
+        int numberOfEmployees = 0;
+
+        for (Employee employee : allEmployees){
+            numberOfEmployees += 1;
+        }
+
+        Iterable<Project> allProjects = projectService.getAllProjects();
+
+        int numberOfOngoingProjects = 0;
+
+        for (Project project : allProjects){
+            String status = project.getProjectStatus();
+            if (status.equals("ongoing")){
+                System.out.println("Success");
+                numberOfOngoingProjects += 1;
+            }
+            System.out.println(project);
+
+        }
+
         Iterable<WorkingLog> allWorkingLogs = workingLogService.searchByEmployeeName(name);
 
         model.addAttribute("allWorkingLogs", allWorkingLogs);
+
+        model.addAttribute("numberOfEmployees", numberOfEmployees);
+
+        model.addAttribute("numberOfOngoingProjects", numberOfOngoingProjects);
 
         return "view/home.html";
 

@@ -3,20 +3,42 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <title>Settings</title>
+    <link th:href="@{/styles/settings.css}" rel="stylesheet" />
+<!--    <script type="text/javascript" th:src="@{/javascript/homePage.js}"></script>-->
 </head>
 <body>
-<h1 th:inline="text">Hello <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
 
-<div>
-    <ul>
-        <li>Profile</li>
-        <li>Preference</li>
-        <li>
-            <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Sign Out"/>
-            </form>
-        </li>
-    </ul>
+<div class="sidebar">
+
+    <img th:src="@{/images/logo.png}" alt="Company Logo" class="logo">
+
+    <a th:href="@{/home}">Dashboard</a>
+    <a th:href="@{/employee}">Employees</a>
+    <a th:href="@{/project}">Projects</a>
+    <a th:href="@{/task}">Tasks <span class="beta-label">Beta</span></a>
+    <a href="#">Reports <span class="coming-soon">(Coming Soon)</span></a>
+    <a th:href="@{/settings}">Settings</a>
+</div>
+
+<div class="content">
+    <h1 th:inline="text">You are currently logged in as <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
+
+    <div class="settings-container">
+        <ul>
+            <li>Profile <span class="coming-soon">(Coming Soon)</span></li>
+            <li>Preference <span class="coming-soon">(Coming Soon)</span></li>
+            <li>
+                <a th:href="@{/user}">Users</a>
+            </li>
+            <li>
+                <a href="#" onclick="document.getElementById('logoutForm').submit();">Sign Out</a>
+                <form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;">
+                    <input type="submit" value="Sign Out" />
+                </form>
+            </li>
+        </ul>
+
+    </div>
 
 </div>
 

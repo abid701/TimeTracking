@@ -136,6 +136,10 @@ th {
     border-radius: var(--border-radius);
 }
 
+.coming-soon {
+    color: red;
+}
+
 /* 4. Media Queries */
 
 /* For screens up to 1280px wide (includes iPad Pro portrait 1024×1366)

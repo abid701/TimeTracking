@@ -170,13 +170,6 @@ th {
     border: 1px solid #ccc;
 }
 
-.settings-icon {
-    cursor: pointer;
-    font-size: 24px;
-    padding: 10px;
-    transition: transform 0.3s ease;
-}
-
 .show {
     display: block;
 }

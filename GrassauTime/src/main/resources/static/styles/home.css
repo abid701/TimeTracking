@@ -151,6 +151,55 @@ th {
     background: rgba(255, 165, 0, 0.2);
 }
 
+.settings-menu {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: white;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    z-index: 1000;
+}
+
+.filter-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.settings-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.filter-container select, .filter-container input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.settings-icon {
+    cursor: pointer;
+    font-size: 24px;
+    padding: 10px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.show {
+    display: block;
+}
+
 
 /* 4. Media Queries */
 
@@ -245,37 +294,6 @@ th {
     display: none;
 }
 
-.settings-menu {
-    display: none;
-}
 
-.filter-container {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.settings-container {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.filter-container select, .filter-container input {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-
-.settings-icon {
-    cursor: pointer;
-    font-size: 24px;
-    padding: 10px;
-    transition: transform 0.3s ease;
-}
 
 

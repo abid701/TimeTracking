@@ -3,9 +3,11 @@ package com.grassau.GrassauTime.web.controllers;
 
 import com.grassau.GrassauTime.db.entities.Employee;
 import com.grassau.GrassauTime.db.entities.Project;
+import com.grassau.GrassauTime.db.entities.Task;
 import com.grassau.GrassauTime.db.entities.WorkingLog;
 import com.grassau.GrassauTime.services.EmployeeService;
 import com.grassau.GrassauTime.services.ProjectService;
+import com.grassau.GrassauTime.services.TaskService;
 import com.grassau.GrassauTime.services.WorkingLogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,11 +26,14 @@ public class WorkingLogController {
 
     private final ProjectService projectService;
 
+    private final TaskService taskService;
+
     public WorkingLogController(WorkingLogService workingLogService, EmployeeService employeeService,
-                                ProjectService projectService) {
+                                ProjectService projectService, TaskService taskService) {
         this.workingLogService = workingLogService;
         this.employeeService = employeeService;
         this.projectService = projectService;
+        this.taskService = taskService;
     }
 
     @GetMapping("/home")
@@ -68,11 +73,26 @@ public class WorkingLogController {
 
             }
 
+
+            Iterable<Task> allTasks = taskService.getAllTasks();
+
+            int numberOfCompletedTasks = 0;
+
+            for (Task task : allTasks){
+                if (task.getTaskStatus().equals("completed")){
+                    numberOfCompletedTasks += 1;
+                }
+
+            }
+
             model.addAttribute("allWorkingLogs", thisMonthWorkingLogs);
 
             model.addAttribute("numberOfEmployees", numberOfEmployees);
 
             model.addAttribute("numberOfOngoingProjects", numberOfOngoingProjects);
+
+            model.addAttribute("numberOfcompletedTasks", numberOfCompletedTasks);
+
             return "view/home.html";
         }
 
@@ -102,6 +122,17 @@ public class WorkingLogController {
 
         }
 
+        Iterable<Task> allTasks = taskService.getAllTasks();
+
+        int numberOfCompletedTasks = 0;
+
+        for (Task task : allTasks){
+            if (task.getTaskStatus().equals("completed")){
+                numberOfCompletedTasks += 1;
+            }
+
+        }
+
 
 
         model.addAttribute("allWorkingLogs", allWorkingLogs);
@@ -109,6 +140,8 @@ public class WorkingLogController {
         model.addAttribute("numberOfEmployees", numberOfEmployees);
 
         model.addAttribute("numberOfOngoingProjects", numberOfOngoingProjects);
+
+        model.addAttribute("numberOfcompletedTasks", numberOfCompletedTasks);
 
     //    model.addAttribute("allEmployees", allEmployees);
 
@@ -145,6 +178,17 @@ public class WorkingLogController {
 
         }
 
+        Iterable<Task> allTasks = taskService.getAllTasks();
+
+        int numberOfCompletedTasks = 0;
+
+        for (Task task : allTasks){
+            if (task.getTaskStatus().equals("completed")){
+                numberOfCompletedTasks += 1;
+            }
+
+        }
+
         Iterable<WorkingLog> allWorkingLogs = workingLogService.searchByEmployeeName(name);
 
         model.addAttribute("allWorkingLogs", allWorkingLogs);
@@ -152,6 +196,8 @@ public class WorkingLogController {
         model.addAttribute("numberOfEmployees", numberOfEmployees);
 
         model.addAttribute("numberOfOngoingProjects", numberOfOngoingProjects);
+
+        model.addAttribute("numberOfcompletedTasks", numberOfCompletedTasks);
 
         return "view/home.html";
 

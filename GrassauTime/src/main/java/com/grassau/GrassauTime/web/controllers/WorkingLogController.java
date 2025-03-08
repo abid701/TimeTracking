@@ -73,11 +73,26 @@ public class WorkingLogController {
 
             }
 
+
+            Iterable<Task> allTasks = taskService.getAllTasks();
+
+            int numberOfCompletedTasks = 0;
+
+            for (Task task : allTasks){
+                if (task.getTaskStatus().equals("completed")){
+                    numberOfCompletedTasks += 1;
+                }
+
+            }
+
             model.addAttribute("allWorkingLogs", thisMonthWorkingLogs);
 
             model.addAttribute("numberOfEmployees", numberOfEmployees);
 
             model.addAttribute("numberOfOngoingProjects", numberOfOngoingProjects);
+
+            model.addAttribute("numberOfcompletedTasks", numberOfCompletedTasks);
+
             return "view/home.html";
         }
 
@@ -163,6 +178,17 @@ public class WorkingLogController {
 
         }
 
+        Iterable<Task> allTasks = taskService.getAllTasks();
+
+        int numberOfCompletedTasks = 0;
+
+        for (Task task : allTasks){
+            if (task.getTaskStatus().equals("completed")){
+                numberOfCompletedTasks += 1;
+            }
+
+        }
+
         Iterable<WorkingLog> allWorkingLogs = workingLogService.searchByEmployeeName(name);
 
         model.addAttribute("allWorkingLogs", allWorkingLogs);
@@ -170,6 +196,8 @@ public class WorkingLogController {
         model.addAttribute("numberOfEmployees", numberOfEmployees);
 
         model.addAttribute("numberOfOngoingProjects", numberOfOngoingProjects);
+
+        model.addAttribute("numberOfcompletedTasks", numberOfCompletedTasks);
 
         return "view/home.html";
 

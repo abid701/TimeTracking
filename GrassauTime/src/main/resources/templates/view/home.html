@@ -3,7 +3,7 @@
 <head>
     <title>Home</title>
     <link th:href="@{/styles/home.css}" rel="stylesheet" />
-    <script type="text/javascript" th:src="@{/javascript/homePage.js}"></script>
+    <script type="text/javascript" th:src="@{/js/home.js}"></script>
 </head>
 <body>
 
@@ -48,8 +48,8 @@
         <div class="settings-container">
             <span class="settings-icon" onclick="toggleSettings()">⚙️</span>
             <div class="settings-menu">
-                <button onclick="openModal()">➕ Add Project</button>
-                <button onclick="toggleRemoveMode()">🗑️ Remove Project</button>
+                <button onclick="toggleRemoveMode()">🗑️ Remove Working Log</button>
+                <button id="cancelDelete" style="display:none;" onclick="toggleRemoveMode()">❌ Cancel</button>
             </div>
         </div>
 
@@ -75,6 +75,12 @@
                 <td th:text="${workingLog.endTime}"></td>
                 <td th:text="${workingLog.totalHours}"></td>
                 <td th:text="${workingLog.description}"></td>
+                <td class="delete-column" style="display:none;">
+                    <form th:action="@{/home/delete}" method="post">
+                        <input type="hidden" name="logId" th:value="${workingLog.id}" />
+                        <button type="submit" class="delete-btn">❌ Delete</button>
+                    </form>
+                </td>
             </tr>
         </table>
     </div>

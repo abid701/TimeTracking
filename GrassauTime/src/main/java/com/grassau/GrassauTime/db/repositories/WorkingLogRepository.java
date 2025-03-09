@@ -19,5 +19,7 @@ public interface WorkingLogRepository extends JpaRepository<WorkingLog, Integer>
     // Search by employee's first name (case-insensitive)
     Iterable<WorkingLog> findByEmployee_FirstNameContainingIgnoreCase(String firstName);
 
+    void deleteById(int id);
+
 }
 

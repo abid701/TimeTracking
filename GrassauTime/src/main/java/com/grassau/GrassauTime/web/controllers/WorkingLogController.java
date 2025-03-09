@@ -12,6 +12,7 @@ import com.grassau.GrassauTime.services.WorkingLogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
@@ -201,6 +202,14 @@ public class WorkingLogController {
 
         return "view/home.html";
 
+    }
+
+    // Deletes a specific WorkingLog
+    @PostMapping("/home/delete")
+    public String deleteWorkingLog(@RequestParam int logId){
+        workingLogService.removeWorkingLogById(logId);
+
+        return "redirect:/home";
     }
 
 }

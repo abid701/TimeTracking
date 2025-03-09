@@ -137,4 +137,9 @@ public class WorkingLogService {
         return workingLogRepository.findByEmployee_FirstNameContainingIgnoreCase(employeeName);
     }
 
+    // Delete Working Log By ID
+    public void removeWorkingLogById(int id){
+        workingLogRepository.deleteById(id);
+    }
+
 }

@@ -29,15 +29,18 @@
 
     <div class="filter-container">
 
-      <select id="statusFilter">
-        <option value="all">All</option>
-        <option value="ongoing">Ongoing</option>
-        <option value="completed">Completed</option>
-        <option value="paused">Paused</option>
-      </select>
+      <form th:action="@{/employee}" method="get">
+        <select id="filterByIsActive" name="isActive" onchange="this.form.submit()">
+          <option>--</option>
+          <option value="all">All</option>
+          <option typ value="true">Active</option>
+          <option value="false">inactive</option>
+        </select>
+      </form>
 
-      <input type="text" id="searchBox" placeholder="Search by name or client...">
-
+      <form th:action="@{/employee/search}" method="get">
+        <input type="text" id="searchBox" name="firstName" placeholder="Search by first name">
+      </form>
     </div>
 
     <div class="settings-container">

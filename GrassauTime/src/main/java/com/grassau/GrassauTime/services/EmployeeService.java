@@ -57,4 +57,14 @@ public class EmployeeService {
     public void deleteEmployee(int id) {
         employeeRepository.deleteById(id);
     }
+
+    // Search Employee by first name
+    public Iterable<Employee> searchByFirstName(String firstName){
+        return employeeRepository.findByFirstNameContainingIgnoreCase(firstName);
+    }
+
+    // get employees by status
+    public Iterable<Employee> getEmployeesByIsActive(boolean isActive){
+        return employeeRepository.findAllByIsActive(isActive);
+    }
 }

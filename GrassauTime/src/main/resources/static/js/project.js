@@ -1,44 +1,77 @@
 function toggleSettings() {
-    document.querySelector(".settings-menu").classList.toggle("show");
+  document.querySelector(".settings-menu").classList.toggle("show");
 }
 
+
+// Open the modal
 function openModal() {
-    document.getElementById("projectModal").style.display = "flex";
+  document.getElementById("projectModal").style.display = "flex";
 }
 
+// Close the modal
 function closeModal() {
-    document.getElementById("projectModal").style.display = "none";
+  document.getElementById("projectModal").style.display = "none";
 }
 
-function addProject() {
-    let name = document.getElementById("projectName").value;
-    let client = document.getElementById("clientName").value;
-    let start = document.getElementById("startDate").value;
-    let end = document.getElementById("endDate").value;
-    let status = document.getElementById("status").value;
 
-    if (!name || !client || !start || !end) {
-        alert("Please fill in all fields!");
-        return;
-    }
 
-    let table = document.getElementById("projectTable");
-    let row = table.insertRow(-1);
-    row.classList.add("project-row");
-    row.dataset.status = status;
-    row.innerHTML = `<td>${name}</td><td>${client}</td><td>${start}</td><td>${end}</td><td><span class="status ${status}">${status.charAt(0).toUpperCase() + status.slice(1)}</span></td>`;
+document.addEventListener("DOMContentLoaded", function () {
+    // Select all table cells that contain project statuses
+    const statusCells = document.querySelectorAll(".status-column");
 
-    closeModal();
-}
+    statusCells.forEach(cell => {
+        let statusText = cell.textContent.trim().toLowerCase(); // Get text content & clean it up
+
+        // Remove any existing status classes (in case of updates)
+        cell.classList.remove("ongoing", "completed", "paused");
+
+        // Apply the relevant class based on the status
+        if (statusText === "ongoing") {
+            cell.classList.add("ongoing");
+        } else if (statusText === "completed") {
+            cell.classList.add("completed");
+        } else if (statusText === "paused") {
+            cell.classList.add("paused");
+        }
+    });
+});
+
+// new code
 
 function toggleRemoveMode() {
-    let rows = document.querySelectorAll(".project-row");
-    rows.forEach(row => {
-        row.onclick = function() {
-            let confirmDelete = confirm("Are you sure you want to delete this project?");
-            if (confirmDelete) {
-                this.remove();
-            }
-        };
-    });
+    const deleteColumns = document.querySelectorAll(".delete-column");
+    const deleteButtons = document.querySelectorAll(".delete-btn");
+    const cancelBtn = document.getElementById("cancelDelete");
+    const isActive = deleteColumns[0].style.display === "table-cell";
+
+    if (isActive) {
+        // Hide delete columns
+        deleteColumns.forEach(function(col) {
+            col.style.display = "none";
+        });
+
+        // Hide delete buttons
+        deleteButtons.forEach(function(btn) {
+            btn.style.display = "none";
+        });
+
+        // Hide cancel button
+        cancelBtn.style.display = "none";
+    } else {
+        // Show delete columns
+        deleteColumns.forEach(function(col) {
+            col.style.display = "table-cell";
+        });
+
+        // Show delete buttons
+        deleteButtons.forEach(function(btn) {
+            btn.style.display = "inline-block";
+        });
+
+        // Show cancel button
+        cancelBtn.style.display = "inline-block";
+    }
 }
+
+
+

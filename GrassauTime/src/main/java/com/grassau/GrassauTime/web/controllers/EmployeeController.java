@@ -55,11 +55,44 @@ public class EmployeeController {
 //    }
 
     @GetMapping("/employee")
-    public String showEmployees(Model model){
+    public String showEmployees(@RequestParam(required = false) String isActive,
+                                Model model){
+
+        /* TODO: write clean code
+        /*
+
+        this method checks if an employee is active or inactive and will return the result
+
+        */
+
+
+
+        if (isActive == null || isActive.equalsIgnoreCase("all")) {
+            // Show all employees if isActive is null or "all"
+            Iterable<Employee> allEmployees = employeeService.getAllEmployee();
+        }
+        else if (isActive.equals("true") || isActive.equals("false")){
+            // Convert the parameter to Boolean (true/false)
+            boolean status = Boolean.parseBoolean(isActive);
+            Iterable<Employee> allEmployees = employeeService.getEmployeesByIsActive(status);
+
+            model.addAttribute("allEmployees", allEmployees);
+            return "view/employee.html";
+        }
+
+
 
         Iterable<Employee> allEmployees = employeeService.getAllEmployee();
         model.addAttribute("allEmployees", allEmployees);
         System.out.println(allEmployees.toString());
+        return "view/employee.html";
+    }
+
+    // Search by employee first name
+    @GetMapping("/employee/search")
+    public String searchByEmployeeFirstName(@RequestParam(required = false) String firstName, Model model){
+        Iterable<Employee> allEmployees = employeeService.searchByFirstName(firstName);
+        model.addAttribute("allEmployees", allEmployees);
         return "view/employee.html";
     }
 

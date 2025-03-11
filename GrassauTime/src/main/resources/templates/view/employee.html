@@ -9,15 +9,15 @@
 
 <div class="sidebar">
 
-  <img src="images/logo.png" alt="Company Logo" class="logo">
+  <img th:src="@{/images/logo.png}" alt="Company Logo" class="logo">
 
+  <a th:href="@{/home}">Dashboard</a>
+  <a th:href="@{/employee}">Employees</a>
+  <a th:href="@{/project}">Projects</a>
+  <a th:href="@{/task}">Tasks <span class="beta-label">Beta</span></a>
+  <a href="#">Reports <span class="coming-soon">(Coming Soon)</span></a>
+  <a th:href="@{/settings}">Settings</a>
 
-  <a href="home">Dashboard</a>
-  <a href="employee">Employees</a>
-  <a href="project">Projects</a>
-  <a href="#">Tasks</a>
-  <a href="#">Reports</a>
-  <a href="#">Settings</a>
 </div>
 
 
@@ -29,22 +29,25 @@
 
     <div class="filter-container">
 
-      <select id="statusFilter">
-        <option value="all">All</option>
-        <option value="ongoing">Ongoing</option>
-        <option value="completed">Completed</option>
-        <option value="paused">Paused</option>
-      </select>
+      <form th:action="@{/employee}" method="get">
+        <select id="filterByIsActive" name="isActive" onchange="this.form.submit()">
+          <option>--</option>
+          <option value="all">All</option>
+          <option typ value="true">Active</option>
+          <option value="false">inactive</option>
+        </select>
+      </form>
 
-      <input type="text" id="searchBox" placeholder="Search by name or client...">
-
+      <form th:action="@{/employee/search}" method="get">
+        <input type="text" id="searchBox" name="firstName" placeholder="Search by first name">
+      </form>
     </div>
 
     <div class="settings-container">
       <span class="settings-icon" onclick="toggleSettings()">⚙️</span>
       <div class="settings-menu">
-        <button onclick="openModal()">➕ Add Project</button>
-        <button onclick="toggleRemoveMode()">🗑️ Remove Project</button>
+        <button onclick="openModal()">➕ Add Employee</button>
+        <button onclick="toggleRemoveMode()">🗑️ Remove Employee</button>
       </div>
 
     </div>

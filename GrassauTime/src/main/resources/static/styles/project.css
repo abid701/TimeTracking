@@ -94,21 +94,47 @@ th {
     color: white;
 }
 
-
-.modal {
-    display: none;
-}
-
-.settings-menu {
-    display: none;
-}
-
 .logo {
     display: block;
     width: 100%;
    /* max-width: 150px; */
     margin: 0 auto 15px;
     border-radius: var(--border-radius);
+}
+
+.modal {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    align-items: center;
+    justify-content: center;
+    z-index: 2000; /* Ensures it appears above everything */
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 400px; /* Adjust size as needed */
+    max-width: 90%;
+    text-align: center;
+}
+
+.settings-menu {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: white;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    z-index: 1000;
 }
 
 .filter-container {
@@ -120,7 +146,9 @@ th {
 }
 
 .settings-container {
+    position: relative;
     display: flex;
+    align-items: center;
     justify-content: flex-end;
     width: 100%;
     margin-bottom: 10px;
@@ -133,25 +161,58 @@ th {
     border: 1px solid #ccc;
 }
 
-
-.status {
-    padding: 5px 10px;
-    border-radius: 8px;
-    color: white;
-    font-weight: bold;
+.show {
+    display: block;
 }
-
-.ongoing { background: #3498db; }
-.completed { background: #2ecc71; }
-.paused { background: #f39c12; }
-.hidden { display: none; }
 
 .settings-icon {
     cursor: pointer;
     font-size: 24px;
     padding: 10px;
     transition: transform 0.3s ease;
+    display: inline-block;
+    vertical-align: middle;
 }
+
+
+.ongoing {
+    padding: 5px 10px;
+    background: #3498db;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+ }
+.completed {
+    padding: 5px 10px;
+    background: #2ecc71;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+ }
+.paused {
+    padding: 5px 10px;
+    background: #f39c12;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+ }
+.hidden { display: none; }
+
+.coming-soon {
+    color: red;
+}
+
+.beta-label {
+    color: orange;
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-left: 5px;
+    border: 1px solid orange;
+    padding: 2px 6px;
+    border-radius: 5px;
+    background: rgba(255, 165, 0, 0.2);
+}
+
 
 
 @media (max-width: 1280px) {

@@ -8,26 +8,36 @@
 <body>
 
 <div class="sidebar">
-    <img src="images/logo.png" alt="Company Logo" class="logo">
-    <a href="home">Dashboard</a>
-    <a href="employee">Employees</a>
-    <a href="project" class="active">Projects</a>
-    <a href="tasks.html">Tasks</a>
-    <a href="reports.html">Reports</a>
-    <a href="settings.html">Settings</a>
+
+    <img th:src="@{/images/logo.png}" alt="Company Logo" class="logo">
+
+    <a th:href="@{/home}">Dashboard</a>
+    <a th:href="@{/employee}">Employees</a>
+    <a th:href="@{/project}">Projects</a>
+    <a th:href="@{/task}">Tasks <span class="beta-label">Beta</span></a>
+    <a href="#">Reports <span class="coming-soon">(Coming Soon)</span></a>
+    <a th:href="@{/settings}">Settings</a>
 </div>
+
 <div class="content">
     <h1>Projects</h1>
 
     <div class="table-container">
         <div class="filter-container">
-            <select id="statusFilter">
-                <option value="all">All</option>
-                <option value="ongoing">Ongoing</option>
-                <option value="completed">Completed</option>
-                <option value="paused">Paused</option>
-            </select>
-            <input type="text" id="searchBox" placeholder="Search by name or client...">
+            <form th:action="@{/project}" method="get">
+                <select id="statusFilter" name="status" onchange="this.form.submit()">
+                    <option>--</option>
+                    <option value="all">All</option>
+                    <option value="ongoing">Ongoing</option>
+                    <option value="completed">Completed</option>
+                    <option value="paused">Paused</option>
+                </select>
+            </form>
+
+            <form th:action="@{/project/search}" method="get">
+                <input type="text" id="searchBox" name="client" placeholder="Search by client...">
+            </form>
+
         </div>
 
         <div class="settings-container">
@@ -46,20 +56,21 @@
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Status</th>
+                <th>Description</th>
             </tr>
-            <tr class="project-row" data-status="ongoing">
-                <td>Website Redesign</td>
-                <td>Acme Corp</td>
-                <td>2024-01-10</td>
-                <td>2024-06-15</td>
-                <td><span class="status ongoing">Ongoing</span></td>
-            </tr>
-            <tr class="project-row" data-status="completed">
-                <td>CRM System</td>
-                <td>Beta Inc.</td>
-                <td>2023-09-01</td>
-                <td>2024-03-20</td>
-                <td><span class="status completed">Completed</span></td>
+            <tr th:each="project : ${allProjects}">
+                <td th:text="${project.name}"></td>
+                <td th:text="${project.clientName}"></td>
+                <td th:text="${project.startDate}"></td>
+                <td th:text="${project.endDate}"></td>
+                <td> <span class="status-column" th:text="${project.projectStatus}"></span></td>
+                <td th:text="${project.description}"></td>
+                <td class="delete-column" style="display:none;">
+                    <form th:action="@{/project/delete}" method="post">
+                        <input type="hidden" name="projectId" th:value="${project.id}" />
+                        <button><a th:href="@{'/project/delete/' + ${project.id}}" class="delete-btn" onclick="return confirm('Are you sure?')">❌ Delete</a></button>
+                    </form>
+                </td>
             </tr>
         </table>
     </div>
@@ -69,17 +80,20 @@
 <div class="modal" id="projectModal">
     <div class="modal-content">
         <h2>Add Project</h2>
-        <input type="text" id="projectName" placeholder="Project Name">
-        <input type="text" id="clientName" placeholder="Client Name">
-        <input type="date" id="startDate">
-        <input type="date" id="endDate">
-        <select id="status">
-            <option value="ongoing">Ongoing</option>
-            <option value="completed">Completed</option>
-            <option value="paused">Paused</option>
-        </select>
-        <button onclick="addProject()">Add</button>
-        <button onclick="closeModal()">Cancel</button>
+        <form th:action="@{/project/add}" method="post">
+            <input type="text" name="projectName" placeholder="Project Name" required>
+            <input type="text" name="clientName" placeholder="Client Name" required>
+            <input type="date" name="startDate" required>
+            <input type="date" name="endDate">
+            <select name="status" required>
+                <option value="ongoing">Ongoing</option>
+                <option value="completed">Completed</option>
+                <option value="paused">Paused</option>
+            </select>
+            <input type="text" name="description" placeholder="description" >
+            <button type="submit">Add</button>
+            <button onclick="closeModal()">Cancel</button>
+        </form>
     </div>
 </div>
 

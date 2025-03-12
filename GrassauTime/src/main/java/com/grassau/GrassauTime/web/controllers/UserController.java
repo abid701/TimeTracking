@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.security.Principal;
 
 
 /**
@@ -67,7 +68,8 @@ public class UserController {
             @RequestParam String username,
             @RequestParam String password,
             @RequestParam String role,
-            @RequestParam(required = false) String employeeId){
+            @RequestParam(required = false) String employeeId,
+            Principal principal){ // get logged user
 
         User newUser = new User();
 
@@ -78,26 +80,48 @@ public class UserController {
         newUser.setUsername(username);
         newUser.setPassword(encodedPassword);
 
-        // Assign role based on input
-        if (role.equals("user")){
-            newUser.setRole(Role.USER);
-        }
-        else if (role.equals("admin")){
-            newUser.setRole(Role.ROLE_ADMIN);
-        }
+        // Check if an admin exists in the system
+        boolean doesAdminExists = userService.doesAdminExists();
 
-        // Associate user with an employee if provided
-        if (employeeId != null && !employeeId.trim().isEmpty()){
-            /* We need to convert employeeId to an integer before using setEmployee method cause it only takes
-               integer as argument */
-            int convertedEmployeeId = Integer.parseInt(employeeId);
-            Employee employee = employeeService.getEmployeeById(convertedEmployeeId);
-            newUser.setEmployee(employee);
+        try {
+
+            if ("admin".equals(role)) {
+                // If no admin exists, allow creation
+                if (!doesAdminExists) {
+                    newUser.setRole(Role.ADMIN);
+                }
+                // If an admin exists, only another admin can create a new admin
+                else if (principal != null) {
+                    User currentUser = userService.getUserByUsername(principal.getName());
+                    if (currentUser.getRole() == Role.ADMIN) {
+                        newUser.setRole(Role.ADMIN);
+                    } else {
+                        return "redirect:/error/403"; // Access denied if not an admin
+                    }
+                } else {
+                    return "redirect:/error/403"; // If no principal, block admin creation
+                }
+            } else {
+                newUser.setRole(Role.USER);
+            }
+
+            // Associate user with an employee if provided
+            if (employeeId != null && !employeeId.trim().isEmpty()){
+                /* We need to convert employeeId to an integer before using setEmployee method cause it only takes
+                   integer as argument */
+                int convertedEmployeeId = Integer.parseInt(employeeId);
+                Employee employee = employeeService.getEmployeeById(convertedEmployeeId);
+                newUser.setEmployee(employee);
+            }
+
+
+            // Save the user to the database
+            userService.saveUser(newUser);
+        } catch (Exception e) {
+            System.out.println("it works");
+
+            return "error/userAlreadyExists.html";
         }
-
-
-        // Save the user to the database
-        userService.saveUser(newUser);
 
         return "redirect:/user";
     }

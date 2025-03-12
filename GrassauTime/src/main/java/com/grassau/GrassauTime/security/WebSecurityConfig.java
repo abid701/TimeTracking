@@ -41,7 +41,10 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/welcome", "/scan", "/styles/**", "/js/**", "/images/**",
-                                "web/controllers/WelcomeController").permitAll() // Allow these paths without login
+                                "web/controllers/WelcomeController",
+                                "/createAccount", "web/controllers/CreateAccountController",
+                                "error/**",
+                                "/createAccount/add").permitAll() // Allow these paths without login
                         .requestMatchers("/admin/**").hasRole("ADMINISTRATOR") // Only accessible by ADMINISTRATOR role
                         .requestMatchers("/employee/**").hasRole("USER") // Only accessible by USER role
                         .anyRequest().authenticated() // Everything else requires authentication

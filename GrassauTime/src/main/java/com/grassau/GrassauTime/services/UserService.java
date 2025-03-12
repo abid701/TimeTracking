@@ -3,6 +3,7 @@ package com.grassau.GrassauTime.services;
 
 import com.grassau.GrassauTime.db.entities.User;
 import com.grassau.GrassauTime.db.repositories.UserRepository;
+import com.grassau.GrassauTime.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,13 @@ public class UserService {
 
     public void saveUser(User user){
         userRepository.save(user);
+    }
+
+    public boolean doesAdminExists() {
+        return userRepository.countByRole(Role.ADMIN) > 0;
+    }
+
+    public User getUserByUsername(String username){
+        return userRepository.findByusername(username);
     }
 }

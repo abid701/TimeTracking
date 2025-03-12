@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Create Account</title>
+<!--    <link th:href="@{/styles/home.css}" rel="stylesheet" />-->
+<!--    <script type="text/javascript" th:src="@{/js/home.js}"></script>-->
+</head>
+<body>
+
+<div class="modal" id="userModal">
+    <div class="modal-content">
+        <h2>You need to be an admin to create an admin account, if there is already one.</h2>
+        <form th:action="@{/createAccount/add}" method="post">
+            <input type="text" name="username" placeholder="username" required>
+            <input type="text" name="password" placeholder="password" required>
+            <select name="role">
+                <option value="user">user</option>
+                <option value="admin">admin</option>
+            </select>
+            <input type="text" name="employeeId" placeholder="Employee ID">
+
+            <button type="submit">Add</button>
+            <button type="button" onclick="closeModal()">Cancel</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

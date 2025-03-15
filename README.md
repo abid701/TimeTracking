@@ -23,7 +23,7 @@ DBeaver (Community or Enterprise edition)
 
 A valid PostgreSQL database connection in DBeaver
 
-Importing the Example Database
+## Importing the Example Database
 
 Step 1: Connect to PostgreSQL in DBeaver
 

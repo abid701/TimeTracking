@@ -25,7 +25,7 @@ A valid PostgreSQL database connection in DBeaver
 
 ## Importing the Example Database
 
-Step 1: Connect to PostgreSQL in DBeaver
+## Step 1: Connect to PostgreSQL in DBeaver
 
 Open DBeaver.
 
@@ -49,7 +49,7 @@ Click Test Connection to verify the connection.
 
 If successful, click Finish.
 
-Step 2: Import the Example Database
+## Step 2: Import the Example Database
 
 Download the example database file (example_database.sql).
 

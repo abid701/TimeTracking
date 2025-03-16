@@ -55,7 +55,7 @@ Download the example database file (dump-time_tracking-202503161325.sql) from th
 
 Open DBeaver and ensure you're connected to your PostgreSQL database. See if you have any schemas named public (delete it if you have one) the script would generate that automatically, make sure to delete it, so the script can run successfully.
 
-## Step 2: Just run the script
+## Step 3: Simply Run The Script
 
  Execute SQL Script.
 

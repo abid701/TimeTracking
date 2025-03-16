@@ -62,3 +62,15 @@ Open DBeaver and ensure you're connected to your PostgreSQL database. See if you
 Note: In DBeaver if you wanna execute the whole script, you have to select all and then click execute.
 
 Once completed, refresh the database schema in DBeaver to verify the imported tables and data.
+
+
+## Starting The Program
+
+## Step 1:
+Open the project on a code editor, idealy IntelliJ for simplicity. On IntelliJ navigate to this location GrassauTime/src/main/resources/ and then open application.properties.
+## Step 2:
+In application.properties find this line:
+spring.datasource.url=jdbc:postgresql://localhost:5432/time_tracking
+In here replace the time_tracking with your database name.
+Note: if you just installed DBeaver and didn't sepcified any name for your database connection yourself it's probably gonna be postgres, if thats the case your code would look like this:
+spring.datasource.url=jdbc:postgresql://localhost:5432/postgres

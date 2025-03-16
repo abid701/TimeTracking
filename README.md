@@ -74,3 +74,18 @@ spring.datasource.url=jdbc:postgresql://localhost:5432/time_tracking
 In here replace the time_tracking with your database name.
 Note: if you just installed DBeaver and didn't sepcified any name for your database connection yourself it's probably gonna be postgres, if thats the case your code would look like this:
 spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
+Also add your password for your connection in this line, in case you have one:
+spring.datasource.password=
+
+## Step 3: Run The Program
+After running the program, open a browser and type: http://localhost:8080/
+
+## How To Login:
+You can login with the accounts below:
+username: test
+password: 1234
+
+username: administrator
+password: Test2020#
+
+

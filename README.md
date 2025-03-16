@@ -51,14 +51,14 @@ If successful, click Finish.
 
 ## Step 2: Import the Example Database
 
-Download the example database file (example_database.sql).
+Download the example database file (dump-time_tracking-202503161325.sql) from the example_database directory.
 
-Open DBeaver and ensure you're connected to your PostgreSQL database.
+Open DBeaver and ensure you're connected to your PostgreSQL database. See if you have any schemas named public (delete it if you have one) the script would generate that automatically, make sure to delete it, so the script can run successfully.
 
-Click on Tools > Execute SQL Script.
+## Step 2: Just run the script
 
-Select the example_database.sql file.
+ Execute SQL Script.
 
-Click Start to execute the script.
+Note: In DBeaver if you wanna execute the whole script, you have to select all and then click execute.
 
 Once completed, refresh the database schema in DBeaver to verify the imported tables and data.

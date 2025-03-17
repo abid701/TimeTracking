@@ -82,9 +82,10 @@ After running the program, open a browser and type: http://localhost:8080/
 
 ## How To Login:
 You can login with the accounts below:
+## user Account
 username: test
 password: 1234
-
+## Admin Account
 username: administrator
 password: Test2020#
 

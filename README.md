@@ -89,8 +89,9 @@ password: 1234
 username: administrator
 password: Test2020#
 
-
+<!--
 ## Troubleshooting
 If for some reason you get the package not found error you can try the solution below:
 Open the maven tab on the right side of the screen, click execute maven and then choose mvn package, now your program should work.
 If for some reason you still have problem starting the program, here is a link that might help you: https://stackoverflow.com/questions/20137020/why-does-intellij-give-me-package-doesnt-exist-error
+-->

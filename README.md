@@ -81,7 +81,7 @@ spring.datasource.password=
 After running the program, open a browser and type: http://localhost:8080/
 
 ## How To Login:
-You can login with the accounts below:
+You can login with the accounts below:\n
 username: test
 password: 1234
 

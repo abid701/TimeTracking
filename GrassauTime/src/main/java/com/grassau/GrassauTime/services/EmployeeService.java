@@ -6,32 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-//@Service
-//public class EmployeeService {
-//
-//    private final EmployeeRepository employeeRepository;
-//
-//    @Autowired
-//    public EmployeeService(EmployeeRepository employeeRepository){
-//        this.employeeRepository = employeeRepository;
-//    }
-//
-//    public Iterable<Employee> getAllEmployee(){
-//        return employeeRepository.findAll();
-//    }
-//
-//    public Employee getEmployeeByCardNumber(String cardNumber){
-//        return employeeRepository.findEmployeeByCardId(cardNumber);
-//    }
-//}
 
 
 
-// This is the last version of code
+ /**
+ * Service class for managing Employee entities.
+ * This service provides methods to perform CRUD operations and more on Employee objects.
+ */
+
 @Service
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
+    /**
+     * Constructs an EmployeeService with the specified EmployeeRepository.
+     *
+     * @param employeeRepository The repository used to perform database operations.
+     */
     @Autowired
     public EmployeeService(EmployeeRepository employeeRepository){
         this.employeeRepository = employeeRepository;
@@ -49,10 +40,12 @@ public class EmployeeService {
         return employeeRepository.findEmployeeByCardId(cardNumber);
     }
 
+    // Save an employee
     public void saveEmployee(Employee employee) {
         employeeRepository.save(employee);
     }
 
+    // Delete by ID
     @Transactional
     public void deleteEmployee(int id) {
         employeeRepository.deleteById(id);
